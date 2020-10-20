@@ -1,3 +1,5 @@
+/*双向链表 特性：新增添了一个前驱指针(用于指向前一个结点)，让操作更加方便、快捷 
+*/ 
 #include<bits/stdc++.h>
 using namespace std;
 
