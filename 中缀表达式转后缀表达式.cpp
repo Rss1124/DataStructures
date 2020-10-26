@@ -1,6 +1,7 @@
+/*题目:中缀表达式转后缀表达式__by栈实现*/ 
 #include<bits/stdc++.h>
 using namespace std;
-#define MAXSIZE 20
+#define MAXSIZE 100
 string str1,str2;
 
 typedef struct{
@@ -37,7 +38,7 @@ void change(SqStack &S){
 		else if(str1[i]=='+'||str1[i]=='-'||str1[i]=='*'||str1[i]=='/'){ //如果发现是运算符 
 			if(empty(S)==true) push(S,str1[i]); //如果此时栈是空的，则直接入栈
 			else{ //如果栈不为空 
-				if(str1[i]=='*'||str1[i]=='/') push(S,str1[i]); //如果此时是最高级的操作符'*'或者'/',则直接入栈 
+				if(str1[i]=='*'||str1[i]=='/'||S.c[S.top]=='(') push(S,str1[i]); //如果此时是最高级的操作符'*'或者'/'再或者操作符下面是一个'(',则直接入栈 
 				else{ //否则将下面的元素出栈,出栈后再将新的操作符入栈 
 					str2+=pop(S);
 					push(S,str1[i]); 
@@ -46,9 +47,11 @@ void change(SqStack &S){
 		}
 		else if(str1[i]=='(') push(S,str1[i]); //如果发现是左括号，直接入栈 
 		else if(str1[i]==')'){
-			while(S.c[S.top+1]=='('){
+			while(S.c[S.top]!='('){ //注意while循环的规则，当满足括号内的条件时，while循环就会停止 
 				str2+=pop(S);
 			}
+			pop(S);
+//			cout<<"test:"<<S.top<<" "<<S.c[S.top]<<endl; 
 		} 
 		
 	}
