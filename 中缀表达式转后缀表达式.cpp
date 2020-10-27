@@ -1,4 +1,4 @@
-/*题目:中缀表达式转后缀表达式__by栈实现*/ 
+/*题目:中缀表达式转后缀表达式(只能转换0-9的中缀表达式)__by栈实现*/ 
 #include<bits/stdc++.h>
 using namespace std;
 #define MAXSIZE 100
@@ -8,6 +8,12 @@ typedef struct{
 	char c[MAXSIZE]; //运算符
 	int top; //栈顶指针 
 }SqStack;
+
+bool init_SqStack(SqStack &S); //栈的初始化
+bool empty(SqStack S); //栈的判空
+bool push(SqStack &S,char ch); //入栈 
+char pop(SqStack &S); //出栈 
+void change(SqStack &S); //前缀转后缀 
 
 bool init_SqStack(SqStack &S){
 	S.top=-1;
