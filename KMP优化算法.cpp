@@ -1,12 +1,12 @@
-/*题目：模式串获取next数组*/ 
+/*KMP优化算法*/ 
 #include<bits/stdc++.h>
 using namespace std;
-string str; 
+string str1,str2; 
 
 string get_modelstr(int n){ //获取模型字符串 
 	string mstr;
 	for(int i=0;i<n;i++){
-		mstr+=str[i];
+		mstr+=str2[i];
 	}
 	return mstr;
 }
@@ -37,14 +37,30 @@ void get_backarr(string str,int *arr,int length){
 //		cout<<arr[i]<<" ";
 //	}	
 }
-
-
-int main(){
-	cin>>str;
-	int length=str.length();
-	int arr[length+1]={0};	
-	get_backarr(str,arr,length);
-	for(int i=0;i<=length;i++){
-		cout<<arr[i]<<" ";
+bool check_string(string str1,string str2,int *arr){
+	for(int i=0,j=0;i<str1.length();i++){		
+		if(str1[i]==str2[j]){ //某个字符匹配成功 
+			cout<<"成功"<<" "<<"i："<<i<<" "<<"j："<<j<<endl;//test		
+			if(j==str2.length()-1) return true;
+			else j++;		
+		}
+		else if(str1[i]!=str2[j]){
+			cout<<"失败"<<" "<<"i："<<i<<" "<<"j："<<j<<endl;//test	
+			if(i==str1.length()-1) return false;			
+			j=arr[j+1]-1;
+		}
 	}
 }
+
+int main(){
+	cin>>str1; //str1是大字符串 
+	cin>>str2; //str2是小字符串
+	int length=str2.length();
+	int arr[length+1]={0};	
+	get_backarr(str2,arr,length); //获取next字符串 
+	cout<<check_string(str1,str2,arr);
+//	for(int i=0;i<=length;i++){
+//		cout<<arr[i]<<" ";
+//	}
+}
+ 
