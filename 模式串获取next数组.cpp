@@ -3,14 +3,18 @@
 using namespace std;
 string str; 
 
-string get_modelstr(int n){ //获取模型字符串 
+string get_modelstr(int n); //获取模型字符串 
+int get_back(string mstr); //获取返回值,代入的参数是模型字符串mstr 
+void get_backarr(string str,int *arr,int length); //获取next数组 
+
+string get_modelstr(int n){
 	string mstr;
 	for(int i=0;i<n;i++){
 		mstr+=str[i];
 	}
 	return mstr;
 }
-int get_back(string mstr){ //获取返回值,代入的参数是模型字符串mstr 
+int get_back(string mstr){ 
 	int flag,max=0; //flag用来记录匹配到的最长的字符串长度 
 	string str1,str2; //str1：串的前缀，str2：串的后缀 
 	for(int i=0,j=mstr.length()-1;i<mstr.length()-1;i++,j--){
